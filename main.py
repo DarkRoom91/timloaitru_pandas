@@ -2,9 +2,9 @@ import pandas as pd
 import os
 import openpyxl
 import xlsxwriter
-from datetime import datetime
+
 from danh_sach_loai_tru import list_hdqt
-from get_month import get_thang_nam
+from get_month import get_thang_nam, turn_to_month_year
 list_loai_tru = []
 
 # file excel ghi output
@@ -16,9 +16,8 @@ list_file_03_path = []
 for file_name in list_file_03:
     list_file_03_path.append(os.path.join(file_03_folder_path, file_name))
 
+
 # --------------------def tim_loai_tru---------------------------
-
-
 def tim_loai_tru(mkh_loaitru, file03):
     global list_loai_tru
     thang_nam = get_thang_nam(file03)
@@ -41,11 +40,7 @@ def tim_loai_tru(mkh_loaitru, file03):
                 list_loai_tru.append(row_list)
 
 
-# def chuyển định dạng ngày tháng
-def turn_to_month_year(date_string):
-    date_obj = datetime.strptime(date_string, "%Y%m%d")
-    formatted_date = f"tháng {date_obj.strftime('%m/%Y')}"
-    return formatted_date
+
 
 
 # loop through every file in the file 03/BHTG folder for making loai tru data

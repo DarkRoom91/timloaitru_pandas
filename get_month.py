@@ -1,4 +1,5 @@
 import pandas as pd
+from datetime import datetime
 
 
 def get_thang_nam(file_03):
@@ -12,3 +13,10 @@ def get_thang_nam(file_03):
     # thang_nam = data["QTD Nhân Dân Hồng Thành "][2]
     thang_nam = thang_nam.replace(' năm ', "/")
     return thang_nam
+
+
+# def chuyển định dạng ngày tháng
+def turn_to_month_year(date_string):
+    date_obj = datetime.strptime(date_string, "%Y%m%d")
+    formatted_date = f"tháng {date_obj.strftime('%m/%Y')}"
+    return formatted_date
