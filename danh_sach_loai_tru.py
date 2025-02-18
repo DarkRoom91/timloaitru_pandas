@@ -18,7 +18,7 @@ class MakeList:
         return list_key[list_key.index(startm):list_key.index(endm)+1]
 
 
-list_hdqt=[
+list_hdqt_5vdl=[
     MakeList(MakeList.starm_endm("Tháng 01/2020", "Tháng 12/2022"), ["TV.01.00021"], "hdqt_bgd_bks"),
     MakeList(MakeList.starm_endm("Tháng 01/2020", "Tháng 12/2022"), ["TV.06.00510"], "hdqt_bgd_bks"),
     MakeList(MakeList.starm_endm("Tháng 01/2020", "Tháng 12/2022"), ["TV.01.00084"], "hdqt_bgd_bks"),

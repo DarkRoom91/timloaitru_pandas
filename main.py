@@ -1,7 +1,7 @@
 import os
 import openpyxl
 import pandas as pd
-from danh_sach_loai_tru import list_hdqt
+from danh_sach_loai_tru import list_hdqt_5vdl
 from get_month import get_thang_nam, turn_to_month_year
 
 # file excel ghi output
@@ -46,7 +46,7 @@ def tim_loai_tru(mkh_loaitru, file03):
 
 # loop through every file in the file 03/BHTG folder for making loai tru data
 for file_path in list_file_03_path:
-    for ds in list_hdqt:
+    for ds in list_hdqt_5vdl:
         tim_loai_tru(mkh_loaitru=ds, file03=file_path)
 
 # ghi list_loai_tru ra file excel
