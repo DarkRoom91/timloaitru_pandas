@@ -8,10 +8,10 @@ for y in year:
 
 
 class MakeList:
-    def __init__(self, monthm, list_mkh, typem):
-        self.month = monthm
-        self.mkh = list_mkh
-        self.type = typem
+    def __init__(self, month, mkh, type):
+        self.month = month
+        self.mkh = mkh
+        self.type = type
 
     @staticmethod
     def starm_endm(startm, endm):
