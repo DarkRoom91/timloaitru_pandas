@@ -1,10 +1,10 @@
 import pandas as pd
 from datetime import datetime
-
+from main import bhtg03Worksheet, bhtg03Collumns
 
 def get_thang_nam(file_03):
     # noinspection PyTypeChecker
-    data = pd.read_excel(file_03, sheet_name="Sheet1", usecols="A,E:G,J")
+    data = pd.read_excel(file_03, sheet_name=bhtg03Worksheet, usecols=bhtg03Collumns)
     data_header = data.columns.values.tolist()
     first_col = data[data_header[0]] # first col that has thang_nam
     check_list = first_col.str.contains("năm", regex=False).tolist()

@@ -1,30 +1,34 @@
-import pandas as pd
 import os
 import openpyxl
-import xlsxwriter
-
+import pandas as pd
 from danh_sach_loai_tru import list_hdqt
 from get_month import get_thang_nam, turn_to_month_year
-list_loai_tru = []
 
 # file excel ghi output
 workbook_bieuphi_path = r"C:\Users\c291g\Desktop\test.xlsx"
-# get list of every files 03/BHTG in folder
+# thu muc chua file 03/bhtg
 file_03_folder_path = r"D:\Documents\OneDrive\DIV\Kiem Tra\ktr_2023\23_03_hong_thanh\so lieu don vi\03_bhtg\xlsx"
+# ten sheet du lieu trong file 03/bhtg
+bhtg03Worksheet = "Sheet1"
+# header trong file 03/bhtg, 0-index
+bhtg03Header = 6
+# collumns will be read
+bhtg03Collumns = "A, E:G,J,L"
+# make list of every files 03/BHTG in folder
 list_file_03 = os.listdir(path=file_03_folder_path)
 list_file_03_path = []
 for file_name in list_file_03:
     list_file_03_path.append(os.path.join(file_03_folder_path, file_name))
-
+list_loai_tru = []
 
 # --------------------def tim_loai_tru---------------------------
 def tim_loai_tru(mkh_loaitru, file03):
     global list_loai_tru
     thang_nam = get_thang_nam(file03)
-    for m in mkh_loaitru.month:
-        if thang_nam == m:
+    for month in mkh_loaitru.month:
+        if thang_nam == month:
             # noinspection PyTypeChecker
-            data = pd.read_excel(file03, sheet_name="Sheet1", header=6, usecols="A, E:G,J,L") #header co the thay doi
+            data = pd.read_excel(file03, sheet_name=bhtg03Worksheet, header=bhtg03Header, usecols=bhtg03Collumns) #header co the thay doi
             # print(list(data.columns.values))
             frame_loai_tru = data[data["Mã khách hàng (CIF)"].isin(mkh_loaitru.mkh)]
             ngay_thang = frame_loai_tru["Ngày, tháng"].tolist()
@@ -33,14 +37,11 @@ def tim_loai_tru(mkh_loaitru, file03):
             name_id = frame_loai_tru["Giấy tờ cá nhân"].tolist()
             amount = frame_loai_tru["Số dư (đơn vị: đồng)"].tolist()
             phan_loai = frame_loai_tru["Phân loại tiền gửi"].tolist()
-            for i in range(0, len(mkh)):
-                row_list = [turn_to_month_year(date_string=ngay_thang[i]), mkh[i], name[i], name_id[i],
-                            int(amount[i]), mkh_loaitru.type, phan_loai[i]]  # int(amount[i].replace(".", ""))
+            for number in range(0, len(mkh)):
+                row_list = [turn_to_month_year(date_string=ngay_thang[number]), mkh[number], name[number], name_id[number],
+                            int(amount[number]), mkh_loaitru.type, phan_loai[number]]  # int(amount[i].replace(".", ""))
                 print(row_list)
                 list_loai_tru.append(row_list)
-
-
-
 
 
 # loop through every file in the file 03/BHTG folder for making loai tru data
